@@ -11,10 +11,10 @@ public class Student {
     private double math;
     private double programming;
     private double average;
-    private double middle;
+    private double total;
 
-    public double getMiddle() {
-        return middle;
+    public double getTotal() {
+        return total;
     }
 
     public Student() {
@@ -36,8 +36,8 @@ public class Student {
         this.average = average;
     }
 
-    public void setMiddle(double middle) {
-        this.middle = middle;
+    public void setTotal(double total) {
+        this.total = total;
     }
 
     public String getName() {
@@ -92,7 +92,7 @@ public class Student {
         if (Double.compare(student.math, math) != 0) return false;
         if (Double.compare(student.programming, programming) != 0) return false;
         if (Double.compare(student.average, average) != 0) return false;
-        if (Double.compare(student.middle, middle) != 0) return false;
+        if (Double.compare(student.total, total) != 0) return false;
         return name != null ? name.equals(student.name) : student.name == null;
 
     }
@@ -112,7 +112,7 @@ public class Student {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(average);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(middle);
+        temp = Double.doubleToLongBits(total);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }

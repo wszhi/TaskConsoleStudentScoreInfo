@@ -1,6 +1,7 @@
 package com.thoughtworks.action;
 
 import com.thoughtworks.domain.Student;
+import com.thoughtworks.domain.Summary;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,7 +32,7 @@ public class StudentScoreInfo {
             double sum = student.getChinese() + student.getEnglish() + student.getMath() + student.getProgramming();
             double average = sum / 4;
             student.setAverage(average);
-            student.setMiddle(calculateMiddle(scores));
+            student.setTotal(sum);
         }
     }
 
@@ -45,4 +46,28 @@ public class StudentScoreInfo {
         }
     }
 
+    public Summary calculate(List<Student> students) {
+        List<Double> totalScores = new ArrayList<>();
+        double sum = 0;
+        for (Student student : students) {
+            totalScores.add(student.getTotal());
+            sum += student.getTotal();
+        }
+
+        return new Summary(sum / students.size(), calculateMiddle(totalScores));
+    }
+
+    public String printResult(List<Student> students, Summary summary) {
+        String result = "成绩单\n" +
+                "姓名|数学|语文|英语|编程|平均分|总分 \n" +
+                "=================================\n";
+        for (Student student:students){
+            result+=student.getName()+"|"+student.getMath()+"|"+student.getChinese()+"|"+student.getEnglish()+"|"
+                    +student.getProgramming()+"|"+student.getAverage()+"|"+student.getTotal()+"\n";
+        }
+        result+="=================================\n" +
+                "全班总分平均数："+summary.getTotalAverage()+"\n" +
+                "全班总分中位数："+summary.getTotalMidden();
+        return result;
+    }
 }
